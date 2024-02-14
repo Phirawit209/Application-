@@ -56,7 +56,7 @@ const Login = ({navigation}) => {
                     initialValues={{username:'', password: ''}}
                     onSubmit={(values) => {
                        console.log(values);
-                       navigation.navigate("Verification");
+                       navigation.navigate("Signup");
                     }}
                 >
 
@@ -96,11 +96,12 @@ const Login = ({navigation}) => {
                 <StyledButton google={true} onPress={handleSubmit}>
                     <Fontisto name="google" color={primary} size={24} />
                         <ButtonText google={true} color={darkLight}>Sign in with Google</ButtonText>
+                      
                 </StyledButton>
 
                 <ExtraView>
                     <ExtraText>ท่านยังไม่ได้สมัครสมาชิกใช่หรือไม่?</ExtraText>
-                    <TextLink onPress={() => navigation.navigate('Signup')}>
+                    <TextLink onPress={() => navigation.navigate('DeviceInfo')}>
                         <TextLinkContent>สมัครสมาชิก</TextLinkContent>
                     </TextLink>
                 </ExtraView>

@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import { StatusBar } from 'expo-status-bar';
 import { View, TouchableOpacity } from "react-native";
+import { StatusBar } from 'expo-status-bar';
 
 // Formik
 import { Formik } from "formik";
 
 // Icons
-import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
-import { EvilIcons } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
 
 // Datetimepicker
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -21,7 +20,6 @@ import {
     SubTitle,
     StyledFormArea,
     LeftIcon,
-    RightIcon,
     StyledInputLabel,
     StyledButton,
     ButtonText,
@@ -36,12 +34,11 @@ import {
 } from './../components/styles';
 
 // Colors
-const { brand, darkLight, primary } = Colors;
+const { gray } = Colors;
 
 const Signup = ({navigation}) => {
-    const [hidePassword, setHidePassword] = useState(true);
     const [show, setShow] = useState(false);
-    const [date, setDate] = useState(new Date(2023, 0, 1));
+    const [date, setDate] = useState(new Date(2024, 0, 1));
     
     // Actual Date of Birth
     const [dob, setDob] = useState();
@@ -76,119 +73,74 @@ const Signup = ({navigation}) => {
                 )}
 
                 <Formik
-                    initialValues={{username:'',
-                                    email: '',
-                                    password: '',
-                                    confirmpassword: '',
+                    initialValues= {{
                                     firstname: '',
                                     lastname: '',
                                     citizen: '',
                                     phone: '',
-                                    dateofBirth: '',
-                                }}
-                    onSubmit={(values) => {
+                                    dateOfBirth: '',
+                                   }}
+
+                    onSubmit={(values ) => {
                         console.log(values);
                         navigation.navigate('Welcome');
                     }}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, icon }) =>(
                     <StyledFormArea>
-                        <MyTextInput 
-                            label="Username"
-                            icon ="person"
-                            placeholder="กรุณาป้อนชื่อผู้ใช้งาน"
-                            placeholderTextColor={darkLight}
-                            onChangeText={handleChange('username')}
-                            onBlur={handleBlur('username')}
-                            value={values.username}
-                            keyboardType="email-address"
-                        />
-                        <MyTextInput 
-                            label="Email"
-                            icon="mail"
-                            placeholder="กรุณาป้อนอีเมล"
-                            placeholderTextColor={darkLight}
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
-                            keyboardType="email-address"
-                        />
-                         <MyTextInput 
-                            label="Password"
-                            icon="lock"
-                            placeholder="**********"
-                            placeholderTextColor={darkLight}
-                            onChangPasswordeText={handleChange('password')}
-                            onBlur={handleBlur('password')}
-                            value={values.password}
-                            keyboardType="number-pad"
-                            secureTextEntry={hidePassword}
-                            isPassword={true}
-                            hidePassword={hidePassword}
-                            setHidePassword={setHidePassword}
-                        />
-                        <MyTextInput 
-                            label="Confirm Password"
-                            icon="lock"
-                            placeholder="**********"
-                            placeholderTextColor={darkLight}
-                            onChangPasswordeText={handleChange('confirmpassword')}
-                            onBlur={handleBlur('confirmpassword')}
-                            value={values.confirmpassword}
-                            keyboardType="number-pad"
-                            secureTextEntry={hidePassword}
-                            isPassword={true}
-                            hidePassword={hidePassword}
-                            setHidePassword={setHidePassword}
-                        />
+     
                         <MyTextInput 
                             label="Firstname"
                             icon="person"
                             placeholder="กรุณาป้อนชื่อจริง"
-                            placeholderTextColor={darkLight}
+                            placeholderTextColor={gray}
                             onChangeText={handleChange('firstname')}
                             onBlur={handleBlur('firstname')}
                             value={values.firstname}
-                            keyboardType="email-address"
+                            keyboardType="web-search"
                         />
+
                         <MyTextInput 
                             label="Lastname"
                             icon="person"
                             placeholder="กรุณาป้อนนามสกุล"
-                            placeholderTextColor={darkLight}
+                            placeholderTextColor={gray}
                             onChangeText={handleChange('lastname')}
                             onBlur={handleBlur('lastname')}
                             value={values.lastname}
-                            keyboardType="email-address"
+                            keyboardType="web-search"
                         />
+                         
                          <MyTextInput 
                             label="Citizen ID"
                             icon="credit-card"
                             placeholder="กรุณาป้อนหมายเลขบัตรประชาชน"
-                            placeholderTextColor={darkLight}
+                            placeholderTextColor={gray}
                             onChangeText={handleChange('citizen')}
                             onBlur={handleBlur('citizen')}
                             value={values.citizen}
                             keyboardType="number-pad"
                         />
+
                          <MyTextInput 
                             label="Phone Number"
-                            icon="megaphone"
+                            icon="device-mobile"
                             placeholder="กรุณาป้อนหมายเลขโทรศัพท์"
-                            placeholderTextColor={darkLight}
+                            placeholderTextColor={gray}
                             onChangeText={handleChange('phone')}
                             onBlur={handleBlur('phone')}
                             value={values.phone}
                             keyboardType="number-pad"
                         />
+
                         <MyTextInput 
                             label="Date of Birth"
                             icon="calendar"
                             placeholder="YYYY - MM - DD"
-                            placeholderTextColor={darkLight}
-                            onChangeText={handleChange('dateofBirth')}
-                            onBlur={handleBlur('dateofBirth')}
-                            value={dob ? dob.toDateString(): ''}
+                            placeholderTextColor={gray}
+                            onChangeText={handleChange('dateOfBirth')}
+                            onBlur={handleBlur('dateOfBirth')}
+                            value={dob ? dob.toDateString() : ''}
                             isDate={true}
                             editable={false}
                             showDatePicker={showDatePicker}
@@ -215,24 +167,21 @@ const Signup = ({navigation}) => {
     );
 };
 
-const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, isDate, showDatePicker, ...props}) => {
-    return (<View>
-            <LeftIcon>
+const MyTextInput = ({ label, icon, isDate, showDatePicker, ...props}) => {
+    return (
+    <View>
+        <LeftIcon>
             <Octicons name={icon} size={24} color="black" />
-            </LeftIcon>
+        </LeftIcon>
             <StyledInputLabel>{label}</StyledInputLabel>
-            {!isDate && <StyledTextInput {...props} />}
-            {isDate && <TouchableOpacity onPress={showDatePicker} >
-                <StyledTextInput {...props} />
-
-                </TouchableOpacity>}
-            {isPassword && (
-                <RightIcon onPress={() => setHidePassword(!hidePassword)}>
-                    <Ionicons name={hidePassword ? 'md-eye-off' : 'md-eye'} size={20}  color={darkLight} s/>
-                </RightIcon>
-            )}
-        </View>
-    )
+                {!isDate && <StyledTextInput {...props} />}
+                    {isDate && (
+                <TouchableOpacity onPress={showDatePicker} >
+            <StyledTextInput {...props} />
+                </TouchableOpacity>
+                    )}
+    </View>
+    );
 }
 
 export default Signup;
